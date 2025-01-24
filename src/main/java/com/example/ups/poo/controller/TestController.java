@@ -1,4 +1,4 @@
-package com.example.ups.poo.controllers;
+package com.example.ups.poo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ public class TestController {
     }
 
     @GetMapping("/hello")
-    public String hello(@RequestParam String name, @RequestParam String lastname) {
+    public String hello(@RequestParam String name, @RequestParam(required = false) String lastname) {
         return "Hello " + name + " " +
                 lastname + ", this is my first SpringBoot Project xxx! ";
     }
