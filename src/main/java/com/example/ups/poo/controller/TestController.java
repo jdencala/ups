@@ -1,4 +1,4 @@
-package com.example.ups.poo.controllers;
+package com.example.ups.poo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
