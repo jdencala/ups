@@ -21,7 +21,8 @@ public class PersonController {
     }
 
     @GetMapping("/get-person")
-    public ResponseEntity getPersonById(@RequestParam String id){
+    public ResponseEntity getObjectByPersonId(@RequestParam String id){
+        //This method finds a person by comparing id sent in RequestParam.
         return personService.getPersonById(id);
     }
 }
