@@ -17,6 +17,7 @@ public class PersonController {
 
     @GetMapping("/get-all-people")
     public ResponseEntity getAllPeople() {
+        //Get All people registered in App
         return ResponseEntity.status(HttpStatus.OK).body(personService.getAllPeople());
     }
 
