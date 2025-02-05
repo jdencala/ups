@@ -1,6 +1,6 @@
 package com.example.ups.poo.service;
 
-import com.example.ups.poo.dto.Person;
+import com.example.ups.poo.dto.PersonDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,42 +11,42 @@ import java.util.List;
 @Service
 public class PersonService {
 
-    List<Person> personList = new ArrayList<>();
+    List<PersonDTO> personDTOList = new ArrayList<>();
 
     public ResponseEntity getAllPeople() {
-        if(personList.isEmpty()) {
+        if(personDTOList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person list is empty");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(personList);
+        return ResponseEntity.status(HttpStatus.OK).body(personDTOList);
     }
 
     public ResponseEntity getPersonById(String id) {
-        for(Person person: personList) {
-            if(id.equalsIgnoreCase(person.getId())) {
-                return ResponseEntity.status(HttpStatus.OK).body(person);
+        for(PersonDTO personDTO : personDTOList) {
+            if(id.equalsIgnoreCase(personDTO.getId())) {
+                return ResponseEntity.status(HttpStatus.OK).body(personDTO);
             }
         }
         String message = "Person with id: "+id + " not found";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
 
-    public ResponseEntity createPerson(Person person) {
-        personList.add(person);
+    public ResponseEntity createPerson(PersonDTO personDTO) {
+        personDTOList.add(personDTO);
         return ResponseEntity.status(HttpStatus.OK).body("Person successfully registered");
     }
 
-    public ResponseEntity updatePerson(Person person){
-        for(Person per: personList){
-            if(per.getId().equalsIgnoreCase(person.getId())) {
-               per.setName(person.getName());
-               per.setLastname(person.getLastname());
-               per.setAge(person.getAge());
+    public ResponseEntity updatePerson(PersonDTO personDTO){
+        for(PersonDTO per: personDTOList){
+            if(per.getId().equalsIgnoreCase(personDTO.getId())) {
+               per.setName(personDTO.getName());
+               per.setLastname(personDTO.getLastname());
+               per.setAge(personDTO.getAge());
                return ResponseEntity.status(HttpStatus.OK)
-                       .body("Person with id: " + person.getId() + " was successfully updated");
+                       .body("Person with id: " + personDTO.getId() + " was successfully updated");
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("Person with id: " + person.getId() + " not found");
+                .body("Person with id: " + personDTO.getId() + " not found");
     }
 
     public ResponseEntity deletePersonById(String id) {
@@ -54,9 +54,9 @@ public class PersonService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("id: " + id + " does not have the required length (10 chars min.)");
         }
-        for(Person person : personList) {
-            if(id.equalsIgnoreCase(person.getId())) {
-                personList.remove(person);
+        for(PersonDTO personDTO : personDTOList) {
+            if(id.equalsIgnoreCase(personDTO.getId())) {
+                personDTOList.remove(personDTO);
                 return ResponseEntity.status(HttpStatus.OK)
                         .body("Person with id: " + id + " was successfully deleted");
             }
